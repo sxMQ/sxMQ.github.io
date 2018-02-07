@@ -1,0 +1,505 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="John Doe">
+  
+  
+  
+  
+    <meta name="description" content="CSS / Sass 指南用更合理的方式写 CSS 和 Sass
+目录
+术语
+规则声明
+选择器
+属性
+
+
+CSS
+格式
+注释
+OOCSS 和 BEM
+ID 选择器
+JavaScript 钩子
+边框
+
+
+Sass
+语法
+排序
+变量
+Mixins
+扩展指令
+嵌套选择器
+
+
+
+
+terminology
+rule-declaration我们把一个（或一组）选择器和一组属性称之为 “规则声明”。举个例...">
+  
+  <title> [ 倩宝宝 ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2018/01/24/hello-world/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Hello World
+      </div>
+    </div>
+  
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">倩宝宝</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/stiekel/hexo-theme-random">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>No Title</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-11-26</span>
+      
+        <span id = "post-title-updated">Updated at 2017-11-26</span>
+      
+      
+      
+    </p>
+    
+    <h1 id="CSS-Sass-指南"><a href="#CSS-Sass-指南" class="headerlink" title="CSS / Sass 指南"></a>CSS / Sass 指南</h1><p><em>用更合理的方式写 CSS 和 Sass</em></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#terminology">术语</a><ul>
+<li><a href="#rule-declaration">规则声明</a></li>
+<li><a href="#selectors">选择器</a></li>
+<li><a href="#properties">属性</a></li>
+</ul>
+</li>
+<li><a href="#css">CSS</a><ul>
+<li><a href="#formatting">格式</a></li>
+<li><a href="#comments">注释</a></li>
+<li><a href="#oocss-and-bem">OOCSS 和 BEM</a></li>
+<li><a href="#id-selectors">ID 选择器</a></li>
+<li><a href="#javascript-hooks">JavaScript 钩子</a></li>
+<li><a href="#border">边框</a></li>
+</ul>
+</li>
+<li><a href="#sass">Sass</a><ul>
+<li><a href="#syntax">语法</a></li>
+<li><a href="#ordering-of-property-declarations">排序</a></li>
+<li><a href="#variables">变量</a></li>
+<li><a href="#mixins">Mixins</a></li>
+<li><a href="#extend-directive">扩展指令</a></li>
+<li><a href="#nested-selectors">嵌套选择器</a></li>
+</ul>
+</li>
+</ol>
+<p><a name="terminology"></a></p>
+<h2 id="terminology"><a href="#terminology" class="headerlink" title="terminology"></a>terminology</h2><p><a name="rule-declaration"></a></p>
+<h3 id="rule-declaration"><a href="#rule-declaration" class="headerlink" title="rule-declaration"></a>rule-declaration</h3><p>我们把一个（或一组）选择器和一组属性称之为 “规则声明”。举个例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.listing</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="selectors"></a></p>
+<h3 id="selectors"><a href="#selectors" class="headerlink" title="selectors"></a>selectors</h3><p>在规则声明中，“选择器” 负责选取 DOM 树中的元素，这些元素将被定义的属性所修饰。选择器可以匹配 HTML 元素，也可以匹配一个元素的类名、ID, 或者元素拥有的属性。以下是选择器的例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.my-element-class</span> &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[aria-hidden]</span> &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="properties"></a></p>
+<h3 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h3><p>最后，属性决定了规则声明里被选择的元素将得到何种样式。属性以键值对形式存在，一个规则声明可以包含一或多个属性定义。以下是属性定义的例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* some selector */</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f1f1f1</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="css"></a></p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p><a name="formatting"></a></p>
+<h3 id="formatting"><a href="#formatting" class="headerlink" title="formatting"></a>formatting</h3><ul>
+<li>使用 2 个空格作为缩进。</li>
+<li>类名建议使用破折号代替驼峰法。如果你使用 BEM，也可以使用下划线（参见下面的 <a href="#oocss-and-bem">OOCSS 和 BEM</a>）。</li>
+<li>不要使用 ID 选择器。</li>
+<li>在一个规则声明中应用了多个选择器时，每个选择器独占一行。</li>
+<li>在规则声明的左大括号 <code>{</code> 前加上一个空格。</li>
+<li>在属性的冒号 <code>:</code> 后面加上一个空格，前面不加空格。</li>
+<li>规则声明的右大括号 <code>}</code> 独占一行。</li>
+<li>规则声明之间用空行分隔开。</li>
+</ul>
+<p><strong>Bad</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.avatar</span>&#123;</span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">2px</span> solid white; &#125;</span><br><span class="line"><span class="selector-class">.no</span>, <span class="selector-class">.nope</span>, <span class="selector-class">.not_good</span> &#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#lol-no</span> &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.avatar</span> &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.one</span>,</span><br><span class="line"><span class="selector-class">.selector</span>,</span><br><span class="line"><span class="selector-class">.per-line</span> &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="comments"></a></p>
+<h3 id="comments"><a href="#comments" class="headerlink" title="comments"></a>comments</h3><ul>
+<li>建议使用行注释 (在 Sass 中是 <code>//</code>) 代替块注释。</li>
+<li>建议注释独占一行。避免行末注释。</li>
+<li>给没有自注释的代码写上详细说明，比如：<ul>
+<li>为什么用到了 z-index</li>
+<li>兼容性处理或者针对特定浏览器的 hack</li>
+</ul>
+</li>
+</ul>
+<p><a name="oocss-and-bem"></a></p>
+<h3 id="oocss-and-bem"><a href="#oocss-and-bem" class="headerlink" title="oocss-and-bem"></a>oocss-and-bem</h3><p>出于以下原因，我们鼓励使用 OOCSS 和 BEM 的某种组合：</p>
+<ul>
+<li>可以帮助我们理清 CSS 和 HTML 之间清晰且严谨的关系。</li>
+<li>可以帮助我们创建出可重用、易装配的组件。</li>
+<li>可以减少嵌套，降低特定性。</li>
+<li>可以帮助我们创建出可扩展的样式表。</li>
+</ul>
+<p><strong>OOCSS</strong>，也就是 “Object Oriented CSS（面向对象的CSS）”，是一种写 CSS 的方法，其思想就是鼓励你把样式表看作“对象”的集合：创建可重用性、可重复性的代码段让你可以在整个网站中多次使用。</p>
+<p>参考资料：</p>
+<ul>
+<li>Nicole Sullivan 的 <a href="https://github.com/stubbornella/oocss/wiki" target="_blank" rel="noopener">OOCSS wiki</a></li>
+<li>Smashing Magazine 的 <a href="http://www.smashingmagazine.com/2011/12/12/an-introduction-to-object-oriented-css-oocss/" target="_blank" rel="noopener">Introduction to OOCSS</a></li>
+</ul>
+<p><strong>BEM</strong>，也就是 “Block-Element-Modifier”，是一种用于 HTML 和 CSS 类名的<em>命名约定</em>。BEM 最初是由 Yandex 提出的，要知道他们拥有巨大的代码库和可伸缩性，BEM 就是为此而生的，并且可以作为一套遵循 OOCSS 的参考指导规范。</p>
+<ul>
+<li>CSS Trick 的 <a href="https://css-tricks.com/bem-101/" target="_blank" rel="noopener">BEM 101</a></li>
+<li>Harry Roberts 的 <a href="http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/" target="_blank" rel="noopener">introduction to BEM</a></li>
+</ul>
+<p><strong>示例</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">"listing-card listing-card--featured"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"listing-card__title"</span>&gt;</span>Adorable 2BR in the sunny Mission<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"listing-card__content"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Vestibulum id ligula porta felis euismod semper.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.listing-card</span> &#123; &#125;</span><br><span class="line"><span class="selector-class">.listing-card--featured</span> &#123; &#125;</span><br><span class="line"><span class="selector-class">.listing-card__title</span> &#123; &#125;</span><br><span class="line"><span class="selector-class">.listing-card__content</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>.listing-card</code> 是一个块（block），表示高层次的组件。</li>
+<li><code>.listing-card__title</code> 是一个元素（element），它属于 <code>.listing-card</code> 的一部分，因此块是由元素组成的。</li>
+<li><code>.listing-card--featured</code> 是一个修饰符（modifier），表示这个块与 <code>.listing-card</code> 有着不同的状态或者变化。</li>
+</ul>
+<p><a name="id-selectors"></a></p>
+<h3 id="id-selectors"><a href="#id-selectors" class="headerlink" title="id-selectors"></a>id-selectors</h3><p>在 CSS 中，虽然可以通过 ID 选择元素，但大家通常都会把这种方式列为反面教材。ID 选择器给你的规则声明带来了不必要的高<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity" target="_blank" rel="noopener">优先级</a>，而且 ID 选择器是不可重用的。</p>
+<p>想要了解关于这个主题的更多内容，参见 <a href="http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/" target="_blank" rel="noopener">CSS Wizardry 的文章</a>，文章中有关于如何处理优先级的内容。</p>
+<p><a name="javascript-hooks"></a></p>
+<h3 id="javascript-hooks"><a href="#javascript-hooks" class="headerlink" title="javascript-hooks"></a>javascript-hooks</h3><p>避免在 CSS 和 JavaScript 中绑定相同的类。否则开发者在重构时通常会出现以下情况：轻则浪费时间在对照查找每个要改变的类，重则因为害怕破坏功能而不敢作出更改。</p>
+<p>我们推荐在创建用于特定 JavaScript 的类名时，添加 <code>.js-</code> 前缀：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary js-request-to-book"</span>&gt;</span>Request to Book<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a name="border"></a></p>
+<h3 id="border"><a href="#border" class="headerlink" title="border"></a>border</h3><p>在定义无边框样式时，使用 <code>0</code> 代替 <code>none</code>。</p>
+<p><strong>Bad</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.foo</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Good</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.foo</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="sass"></a></p>
+<h2 id="Sass"><a href="#Sass" class="headerlink" title="Sass"></a>Sass</h2><p><a name="syntax"></a></p>
+<h3 id="syntax"><a href="#syntax" class="headerlink" title="syntax"></a>syntax</h3><ul>
+<li>使用 <code>.scss</code> 的语法，不使用 <code>.sass</code> 原本的语法。</li>
+<li>CSS 和 <code>@include</code> 声明按照以下逻辑排序（参见下文）</li>
+</ul>
+<p><a name="ordering-of-property-declarations"></a></p>
+<h3 id="ordering-of-property-declarations"><a href="#ordering-of-property-declarations" class="headerlink" title="ordering-of-property-declarations"></a>ordering-of-property-declarations</h3><ol>
+<li><p>属性声明</p>
+<p> 首先列出除去 <code>@include</code> 和嵌套选择器之外的所有属性声明。</p>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-green</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@include</code> 声明</p>
+<p> 紧随后面的是 <code>@include</code>，这样可以使得整个选择器的可读性更高。</p>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-green</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  @<span class="keyword">include</span> transition(background 0.5s ease);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>嵌套选择器</p>
+<p> <em>如果有必要</em>用到嵌套选择器，把它们放到最后，在规则声明和嵌套选择器之间要加上空白，相邻嵌套选择器之间也要加上空白。嵌套选择器中的内容也要遵循上述指引。</p>
+ <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  @<span class="keyword">include</span> transition(background 0.5s ease);</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.icon</span> &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">10px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><a name="variables"></a></p>
+<h3 id="variables"><a href="#variables" class="headerlink" title="variables"></a>variables</h3><p>变量名应使用破折号（例如 <code>$my-variable</code>）代替 camelCased 和 snake_cased 风格。对于仅用在当前文件的变量，可以在变量名之前添加下划线前缀（例如 <code>$_my-variable</code>）。</p>
+<p><a name="mixins"></a></p>
+<h3 id="Mixins"><a href="#Mixins" class="headerlink" title="Mixins"></a>Mixins</h3><p>为了让代码遵循 DRY 原则（Don’t Repeat Yourself）、增强清晰性或抽象化复杂性，应该使用 mixin，这与那些命名良好的函数的作用是异曲同工的。虽然 mixin 可以不接收参数，但要注意，假如你不压缩负载（比如通过 gzip），这样会导致最终的样式包含不必要的代码重复。</p>
+<p><a name="extend-directive"></a></p>
+<h3 id="extend-directive"><a href="#extend-directive" class="headerlink" title="extend-directive"></a>extend-directive</h3><p>应避免使用 <code>@extend</code> 指令，因为它并不直观，而且具有潜在风险，特别是用在嵌套选择器的时候。即便是在顶层占位符选择器使用扩展，如果选择器的顺序最终会改变，也可能会导致问题。（比如，如果它们存在于其他文件，而加载顺序发生了变化）。其实，使用 @extend 所获得的大部分优化效果，gzip 压缩已经帮助你做到了，因此你只需要通过 mixin 让样式表更符合 DRY 原则就足够了。</p>
+<p><a name="nested-selectors"></a></p>
+<h3 id="nested-selectors"><a href="#nested-selectors" class="headerlink" title="nested-selectors"></a>nested-selectors</h3><p><strong>请不要让嵌套选择器的深度超过 3 层！</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.page-container</span> &#123;</span><br><span class="line">  <span class="selector-class">.content</span> &#123;</span><br><span class="line">    <span class="selector-class">.profile</span> &#123;</span><br><span class="line">      <span class="comment">// STOP!</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当遇到以上情况的时候，你也许是这样写 CSS 的：</p>
+<ul>
+<li>与 HTML 强耦合的（也是脆弱的）<em>—或者—</em></li>
+<li>过于具体（强大）<em>—或者—</em></li>
+<li>没有重用</li>
+</ul>
+<p>再说一遍: <strong>永远不要嵌套 ID 选择器！</strong></p>
+<p>如果你始终坚持要使用 ID 选择器（劝你三思），那也不应该嵌套它们。如果你正打算这么做，你需要先重新检查你的标签，或者指明原因。如果你想要写出风格良好的 HTML 和 CSS，你是<strong>不</strong>应该这样做的。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS-Sass-指南"><span class="toc-text">CSS / Sass 指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#terminology"><span class="toc-text">terminology</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rule-declaration"><span class="toc-text">rule-declaration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selectors"><span class="toc-text">selectors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#properties"><span class="toc-text">properties</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS"><span class="toc-text">CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#formatting"><span class="toc-text">formatting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#comments"><span class="toc-text">comments</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#oocss-and-bem"><span class="toc-text">oocss-and-bem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#id-selectors"><span class="toc-text">id-selectors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript-hooks"><span class="toc-text">javascript-hooks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#border"><span class="toc-text">border</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sass"><span class="toc-text">Sass</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#syntax"><span class="toc-text">syntax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ordering-of-property-declarations"><span class="toc-text">ordering-of-property-declarations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#variables"><span class="toc-text">variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixins"><span class="toc-text">Mixins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend-directive"><span class="toc-text">extend-directive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nested-selectors"><span class="toc-text">nested-selectors</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2018/01/24/hello-world/" class="prev">&larr; Prev post Hello World</a>
+  
+
+  
+
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by John Doe using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/stiekel/hexo-theme-random">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://coding.net/u/Stiekel">
+        
+          <i class="icon iconfont coding">&#xe607;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/SidCN">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://weibo.com/sidcn">
+        
+          <i class="icon iconfont weibo">&#xe602;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://www.douban.com/people/Stiekel/">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
